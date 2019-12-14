@@ -8,6 +8,7 @@ import java.util.Map;
 public class IndianPremierLeagueTest {
     private static final String IPL_CSV_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_CSV_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns.csv";
+    private static final String IPL_CSV_WRONG_HEADER_FILE_PATH = "./src/test/resources/IPLRunsWrongHeader.csv";
     IndianPremierLeague premierLeague = new IndianPremierLeague();
     @Test
     public void givenIplDataFile_ReturnsPlayerWith_BestBattingAvg() {
@@ -25,6 +26,15 @@ public class IndianPremierLeagueTest {
             premierLeague.loadIplData(IPL_CSV_WRONG_FILE_PATH);
         } catch (IplAnalyserException e) {
             Assert.assertEquals(IplAnalyserException.ExceptionType.FILE_PROBLEM,e.type);
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_ifWrongHeader_ThrowsException() {
+        try {
+            premierLeague.loadIplData(IPL_CSV_WRONG_HEADER_FILE_PATH);
+        } catch (IplAnalyserException e) {
+            Assert.assertEquals(IplAnalyserException.ExceptionType.HEADER_MISMATCH,e.type);
         }
     }
 }
