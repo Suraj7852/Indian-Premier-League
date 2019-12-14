@@ -24,7 +24,7 @@ public class IndianPremierLeagueTest {
         try {
             premierLeague.loadIplData(IPL_CSV_WRONG_FILE_PATH);
         } catch (IplAnalyserException e) {
-            Assert.assertEquals(IplAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+            Assert.assertEquals(IplAnalyserException.ExceptionType.FILE_PROBLEM,e.type);
         }
     }
 }

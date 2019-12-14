@@ -26,7 +26,7 @@ public class IndianPremierLeague {
                         forEach(censusCSV -> iplDTOMap.put(censusCSV.player,new IplDTO(censusCSV)));
             return iplDTOMap;
         } catch (IOException e) {
-            throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.FILE_PROBLEM);
         } catch (CSVBuilderException e) {
             throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.UNABLE_TO_PARSE);
         } catch (RuntimeException e) {
