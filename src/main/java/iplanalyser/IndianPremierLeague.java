@@ -3,14 +3,14 @@ package iplanalyser;
 import CSVBuilder.CSVBuilderException;
 import CSVBuilder.CSVBuilderFactory;
 import CSVBuilder.ICSVBuilder;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IndianPremierLeague {
@@ -32,5 +32,15 @@ public class IndianPremierLeague {
         } catch (RuntimeException e) {
             throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.HEADER_MISMATCH);
         }
+    }
+
+    public String sortByAverage(Map<String, IplDTO> loadIplData) {
+        Comparator<IplDTO> comparing = Comparator.comparing(iplDTO -> iplDTO.average,Comparator.reverseOrder());
+        ArrayList ipl = loadIplData.values().stream()
+                .sorted(comparing)
+                .filter(x -> !x.average.equals("-"))
+                .collect(Collectors.toCollection(ArrayList::new));
+        String sortedIplList = new Gson().toJson(ipl);
+        return sortedIplList;
     }
 }

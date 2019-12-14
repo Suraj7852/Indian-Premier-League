@@ -22,54 +22,12 @@ public class IplDTO {
     public String sr;
 
     public IplDTO(IplDTO censusCSV) {
-    }
-
-    public String getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(String player) {
-        this.player = player;
-    }
-
-    public String getMatch() {
-        return match;
-    }
-
-    public void setMatch(String match) {
-        this.match = match;
-    }
-
-    public int getInnings() {
-        return innings;
-    }
-
-    public void setInnings(int innings) {
-        this.innings = innings;
-    }
-
-    public int getRuns() {
-        return runs;
-    }
-
-    public void setRuns(int runs) {
-        this.runs = runs;
-    }
-
-    public String getAverage() {
-        return average;
-    }
-
-    public void setAverage(String average) {
-        this.average = average;
-    }
-
-    public String getSr() {
-        return sr;
-    }
-
-    public void setSr(String sr) {
-        this.sr = sr;
+    this.player=censusCSV.player;
+    this.average= censusCSV.average;
+    this.innings=censusCSV.innings;
+    this.match=censusCSV.match;
+    this.runs=censusCSV.runs;
+    this.sr=censusCSV.sr;
     }
 
     public IplDTO() {

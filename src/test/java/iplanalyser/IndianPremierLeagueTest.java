@@ -37,4 +37,14 @@ public class IndianPremierLeagueTest {
             Assert.assertEquals(IplAnalyserException.ExceptionType.HEADER_MISMATCH,e.type);
         }
     }
+
+    @Test
+    public void givenIplDataFile_forTopBattingAverage() {
+        try {
+            Map<String, IplDTO> loadIplData = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
+            premierLeague.sortByAverage(loadIplData);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
