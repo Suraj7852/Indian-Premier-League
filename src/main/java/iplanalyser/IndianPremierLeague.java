@@ -14,17 +14,18 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IndianPremierLeague {
-    public Map<String, IplDTO> loadIplData(String filePath) throws IplAnalyserException {
-        Map<String, IplDTO> iplDTOMap = new HashMap<>();
+    public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
+        Map<String, IplDAO> iplPlayerMap = new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))
         ){
 
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IplDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader,IplDTO.class);
             Iterable<IplDTO> csvIterable = () -> csvFileIterator;
-                StreamSupport.stream(csvIterable.spliterator(),false).
-                        forEach(iplDTO -> iplDTOMap.put(iplDTO.player,new IplDTO(iplDTO)));
-            return iplDTOMap;
+                StreamSupport.stream(csvIterable.spliterator(),false)
+                        .map(IplDTO.class::cast)
+                        .forEach(iplDAO -> iplPlayerMap.put(iplDAO.player,new IplDAO(iplDAO)));
+            return iplPlayerMap;
         } catch (IOException e) {
             throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.FILE_PROBLEM);
         } catch (CSVBuilderException e) {
@@ -34,11 +35,10 @@ public class IndianPremierLeague {
         }
     }
 
-    public String sortByAverage(Map<String, IplDTO> loadIplData) {
-        Comparator<IplDTO> comparing = Comparator.comparing(iplDTO -> iplDTO.average,Comparator.reverseOrder());
+    public String sortByAverage(Map<String, IplDAO> loadIplData) {
+        Comparator<IplDAO> comparing = Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder());
         ArrayList ipl = loadIplData.values().stream()
                 .sorted(comparing)
-                .filter(x -> !x.average.equals("-"))
                 .collect(Collectors.toCollection(ArrayList::new));
         String sortedIplList = new Gson().toJson(ipl);
         return sortedIplList;
