@@ -23,7 +23,7 @@ public class IndianPremierLeague {
             Iterator<IplDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader,IplDTO.class);
             Iterable<IplDTO> csvIterable = () -> csvFileIterator;
                 StreamSupport.stream(csvIterable.spliterator(),false).
-                        forEach(censusCSV -> iplDTOMap.put(censusCSV.player,new IplDTO(censusCSV)));
+                        forEach(iplDTO -> iplDTOMap.put(iplDTO.player,new IplDTO(iplDTO)));
             return iplDTOMap;
         } catch (IOException e) {
             throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.FILE_PROBLEM);
