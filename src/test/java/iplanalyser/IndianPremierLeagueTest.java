@@ -43,9 +43,21 @@ public class IndianPremierLeagueTest {
     public void givenIplDataFile_forTopBattingAverage() {
         try {
             Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
-            String average = premierLeague.sort(loadIplData);
+            String average = premierLeague.sort(loadIplData,IplFields.AVERAGE);
             IplDTO[] iplDTOS = new Gson().fromJson(average, IplDTO[].class);
             Assert.assertEquals("MS Dhoni",iplDTOS[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_forTopStrikeRate() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
+            String average = premierLeague.sort(loadIplData,IplFields.STRIKE_RATE);
+            IplDTO[] iplDTOS = new Gson().fromJson(average, IplDTO[].class);
+            Assert.assertEquals("Ishant Sharma",iplDTOS[0].player);
         } catch (IplAnalyserException e) {
             e.printStackTrace();
         }

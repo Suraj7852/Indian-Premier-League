@@ -14,6 +14,13 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IndianPremierLeague {
+    Map<IplFields,Comparator<IplDAO>> iplField = null;
+    public IndianPremierLeague() {
+        this.iplField = new HashMap<>();
+        this.iplField.put(IplFields.AVERAGE,Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder()));
+        this.iplField.put(IplFields.STRIKE_RATE,Comparator.comparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
+    }
+
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
         Map<String, IplDAO> iplPlayerMap = new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))
@@ -35,10 +42,9 @@ public class IndianPremierLeague {
         }
     }
 
-    public String sort(Map<String, IplDAO> loadIplData) {
-        Comparator<IplDAO> comparing = Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder());
+    public String sort(Map<String, IplDAO> loadIplData,IplFields fields) {
         ArrayList ipl = loadIplData.values().stream()
-                .sorted(comparing)
+                .sorted(this.iplField.get(fields))
                 .collect(Collectors.toCollection(ArrayList::new));
         String sortedIplList = new Gson().toJson(ipl);
         return sortedIplList;
