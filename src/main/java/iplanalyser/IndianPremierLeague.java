@@ -35,7 +35,7 @@ public class IndianPremierLeague {
         }
     }
 
-    public String sortByAverage(Map<String, IplDAO> loadIplData) {
+    public String sort(Map<String, IplDAO> loadIplData) {
         Comparator<IplDAO> comparing = Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder());
         ArrayList ipl = loadIplData.values().stream()
                 .sorted(comparing)
