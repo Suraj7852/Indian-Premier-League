@@ -20,6 +20,8 @@ public class IndianPremierLeague {
         this.iplField.put(IplFields.AVERAGE,Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder()));
         this.iplField.put(IplFields.STRIKE_RATE,Comparator.comparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
         this.iplField.put(IplFields.SIX,Comparator.comparing(iplDAO -> iplDAO.six,Comparator.reverseOrder()));
+        Comparator<IplDAO>comparator = Comparator.comparing(iplDAO -> iplDAO.average);
+        this.iplField.put(IplFields.AVG_WITH_SR,comparator.thenComparing(ipl -> ipl.sr).reversed());
     }
 
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
@@ -84,5 +86,9 @@ public class IndianPremierLeague {
             }
         }
         return playerName;
+    }
+
+    public IplDAO[] greatAverageWithGreatStrikeRate(Map<String, IplDAO> iplDAOMap, IplFields average) {
+        return this.sort(iplDAOMap, average);
     }
 }

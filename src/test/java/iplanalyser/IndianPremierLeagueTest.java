@@ -9,6 +9,7 @@ public class IndianPremierLeagueTest {
     private static final String IPL_CSV_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_CSV_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_CSV_WRONG_HEADER_FILE_PATH = "./src/test/resources/IPLRunsWrongHeader.csv";
+    private static final String IPL_CSV_DEMO_FILE_PATH = "./src/test/resources/IplDemo.csv";
     IndianPremierLeague premierLeague = new IndianPremierLeague();
     @Test
     public void givenIplDataFile_ReturnsPlayerWith_BestBattingAvg() {
@@ -77,6 +78,17 @@ public class IndianPremierLeagueTest {
             Map<String, IplDAO> iplDAOMap = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
             String rate = premierLeague.strikeRateOfSixAndFour(iplDAOMap, IplFields.SIX);
             Assert.assertEquals("Kagiso Rabada",rate);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_greatAverageWith_greatStrikingRate() {
+        try {
+            Map<String, IplDAO> iplDAOMap = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
+            IplDAO[] rate = premierLeague.greatAverageWithGreatStrikeRate(iplDAOMap, IplFields.AVG_WITH_SR);
+            Assert.assertEquals("MS Dhoni",rate[0].player);
         } catch (IplAnalyserException e) {
             e.printStackTrace();
         }
