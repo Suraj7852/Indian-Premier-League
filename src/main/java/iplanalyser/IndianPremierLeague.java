@@ -66,4 +66,24 @@ public class IndianPremierLeague {
         }
         return playerName;
     }
+
+    public String strikeRateOfSixAndFour(Map<String, IplDAO> iplDAOMap, IplFields six) {
+        String sort = this.sort(iplDAOMap, six);
+        IplDAO[] iplDAOS = new Gson().fromJson(sort, IplDAO[].class);
+        double valueOfSixFOur=0;
+        double noOfBallPlayed = 0;
+        double max = 0;
+        double SR = 0.0;
+        String playerName = "";
+        for (int i=0;i<iplDAOS.length;i++) {
+            valueOfSixFOur = iplDAOS[i].six*6 + iplDAOS[i].four*4;
+            noOfBallPlayed = iplDAOS[i].six + iplDAOS[i].four;
+            SR = (valueOfSixFOur/noOfBallPlayed)*100;
+            if (SR >= max){
+                max = SR;
+                playerName = iplDAOS[i].player;
+            }
+        }
+        return playerName;
+    }
 }

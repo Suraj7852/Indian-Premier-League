@@ -73,4 +73,15 @@ public class IndianPremierLeagueTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIplDataFile_strikeRateBasedOnFourAndSix() {
+        try {
+            Map<String, IplDAO> iplDAOMap = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
+            String rate = premierLeague.strikeRateOfSixAndFour(iplDAOMap, IplFields.SIX);
+            Assert.assertEquals("Kagiso Rabada",rate);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
