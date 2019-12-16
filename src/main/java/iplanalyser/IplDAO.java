@@ -14,15 +14,12 @@ public class IplDAO {
     }
 
     public IplDAO(IplDTO censusCSV) {
-        player=censusCSV.player;
-        if (censusCSV.average.contains("-"))
-            average = 0;
-        else
-            average= Double.parseDouble(censusCSV.average);
-        innings=censusCSV.innings;
-        match=censusCSV.match;
-        runs=censusCSV.runs;
-        sr=censusCSV.sr;
+        player = censusCSV.player;
+        average = censusCSV.average.contains("-")?0:Double.parseDouble(censusCSV.average);
+        innings = censusCSV.innings;
+        match = censusCSV.match;
+        runs = censusCSV.runs;
+        sr = censusCSV.sr;
         four = censusCSV.four;
         six = censusCSV.six;
     }
