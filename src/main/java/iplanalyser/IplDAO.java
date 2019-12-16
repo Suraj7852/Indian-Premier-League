@@ -13,7 +13,7 @@ public class IplDAO {
     public IplDAO() {
     }
 
-    public IplDAO(IplDTO censusCSV) {
+    public IplDAO(IplMostRunDTO censusCSV) {
         player = censusCSV.player;
         average = censusCSV.average.contains("-")?0:Double.parseDouble(censusCSV.average);
         innings = censusCSV.innings;

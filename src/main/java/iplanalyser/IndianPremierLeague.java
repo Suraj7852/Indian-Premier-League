@@ -20,8 +20,10 @@ public class IndianPremierLeague {
         this.iplField.put(IplFields.AVERAGE,Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder()));
         this.iplField.put(IplFields.STRIKE_RATE,Comparator.comparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
         this.iplField.put(IplFields.SIX,Comparator.comparing(iplDAO -> iplDAO.six,Comparator.reverseOrder()));
-        Comparator<IplDAO>comparator = Comparator.comparing(iplDAO -> iplDAO.average);
-        this.iplField.put(IplFields.AVG_WITH_SR,comparator.thenComparing(ipl -> ipl.sr).reversed());
+        Comparator<IplDAO>averageStrikeRate = Comparator.comparing(iplDAO -> iplDAO.average);
+        this.iplField.put(IplFields.AVG_WITH_SR,averageStrikeRate.thenComparing(ipl -> ipl.sr).reversed());
+        Comparator<IplDAO>runsAverage = Comparator.comparing(iplDAO -> iplDAO.runs);
+        this.iplField.put(IplFields.RUN_WITH_AVG,runsAverage.thenComparing(ipl -> ipl.average).reversed());
     }
 
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
@@ -30,10 +32,10 @@ public class IndianPremierLeague {
         ){
 
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IplDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader,IplDTO.class);
-            Iterable<IplDTO> csvIterable = () -> csvFileIterator;
+            Iterator<IplMostRunDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IplMostRunDTO.class);
+            Iterable<IplMostRunDTO> csvIterable = () -> csvFileIterator;
                 StreamSupport.stream(csvIterable.spliterator(),false)
-                        .map(IplDTO.class::cast)
+                        .map(IplMostRunDTO.class::cast)
                         .forEach(iplDAO -> iplPlayerMap.put(iplDAO.player,new IplDAO(iplDAO)));
             return iplPlayerMap;
         } catch (IOException e) {

@@ -2,7 +2,7 @@ package iplanalyser;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class IplDTO {
+public class IplMostRunDTO {
     @CsvBindByName(column = "PLAYER", required = true)
     public String player;
 
@@ -27,7 +27,7 @@ public class IplDTO {
     @CsvBindByName(column = "6s", required = true)
     public int six;
 
-    public IplDTO(String player, int match, int innings, int runs, String average, double sr, int four, int six) {
+    public IplMostRunDTO(String player, int match, int innings, int runs, String average, double sr, int four, int six) {
         this.player = player;
         this.match = match;
         this.innings = innings;
@@ -38,6 +38,6 @@ public class IplDTO {
         this.six = six;
     }
 
-    public IplDTO() {
+    public IplMostRunDTO() {
     }
 }

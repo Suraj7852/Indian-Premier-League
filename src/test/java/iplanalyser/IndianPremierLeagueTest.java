@@ -88,7 +88,18 @@ public class IndianPremierLeagueTest {
         try {
             Map<String, IplDAO> iplDAOMap = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
             IplDAO[] rate = premierLeague.greatAverageWithGreatStrikeRate(iplDAOMap, IplFields.AVG_WITH_SR);
-            Assert.assertEquals("MS Dhoni",rate[0].player);
+            Assert.assertEquals("David Warner",rate[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_maximumRunWith_greatAverage() {
+        try {
+            Map<String, IplDAO> iplDAOMap = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
+            IplDAO[] rate = premierLeague.greatAverageWithGreatStrikeRate(iplDAOMap, IplFields.RUN_WITH_AVG);
+            Assert.assertEquals("David Warner",rate[0].player);
         } catch (IplAnalyserException e) {
             e.printStackTrace();
         }
