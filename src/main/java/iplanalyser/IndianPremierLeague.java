@@ -69,17 +69,17 @@ public class IndianPremierLeague {
 
     public String strikeRateOfSixAndFour(Map<String, IplDAO> iplDAOMap, IplFields six) {
         IplDAO[] sort = this.sort(iplDAOMap, six);
-        double valueOfSixFOur=0;
+        double scoreBasedOnSixFOur=0;
         double noOfBallPlayed = 0;
         double max = 0;
-        double SR = 0.0;
+        double strikeRate = 0.0;
         String playerName = "";
         for (int i=0;i<sort.length;i++) {
-            valueOfSixFOur = sort[i].six*6 + sort[i].four*4;
+            scoreBasedOnSixFOur = sort[i].six*6 + sort[i].four*4;
             noOfBallPlayed = sort[i].six + sort[i].four;
-            SR = (valueOfSixFOur/noOfBallPlayed)*100;
-            if (SR >= max){
-                max = SR;
+            strikeRate = (scoreBasedOnSixFOur/noOfBallPlayed)*100;
+            if (strikeRate >= max){
+                max = strikeRate;
                 playerName = sort[i].player;
             }
         }
