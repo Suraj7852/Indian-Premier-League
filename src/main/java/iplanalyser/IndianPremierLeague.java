@@ -43,45 +43,44 @@ public class IndianPremierLeague {
         }
     }
 
-    public String sort(Map<String, IplDAO> loadIplData,IplFields fields) {
+    public IplDAO[] sort(Map<String, IplDAO> loadIplData, IplFields fields) {
         ArrayList ipl = loadIplData.values().stream()
                 .sorted(this.iplField.get(fields))
                 .collect(Collectors.toCollection(ArrayList::new));
         String sortedIplList = new Gson().toJson(ipl);
-        return sortedIplList;
+        IplDAO[] iplDAOS = new Gson().fromJson(sortedIplList, IplDAO[].class);
+        return iplDAOS;
     }
 
     public String maxFourSix(Map<String, IplDAO> daoMap, IplFields six) {
-        String sort = this.sort(daoMap, six);
-        IplDAO[] iplDAOS = new Gson().fromJson(sort, IplDAO[].class);
+        IplDAO[] sort = this.sort(daoMap, six);
         int valueOfSixFOur=0;
         int max = 0;
         String playerName = "";
-        for (int i=0;i<iplDAOS.length;i++) {
-            valueOfSixFOur = iplDAOS[i].six*6 + iplDAOS[i].four*4;
+        for (int i=0;i<sort.length;i++) {
+            valueOfSixFOur = sort[i].six*6 + sort[i].four*4;
             if (valueOfSixFOur >= max){
                 max = valueOfSixFOur;
-                playerName = iplDAOS[i].player;
+                playerName = sort[i].player;
             }
         }
         return playerName;
     }
 
     public String strikeRateOfSixAndFour(Map<String, IplDAO> iplDAOMap, IplFields six) {
-        String sort = this.sort(iplDAOMap, six);
-        IplDAO[] iplDAOS = new Gson().fromJson(sort, IplDAO[].class);
+        IplDAO[] sort = this.sort(iplDAOMap, six);
         double valueOfSixFOur=0;
         double noOfBallPlayed = 0;
         double max = 0;
         double SR = 0.0;
         String playerName = "";
-        for (int i=0;i<iplDAOS.length;i++) {
-            valueOfSixFOur = iplDAOS[i].six*6 + iplDAOS[i].four*4;
-            noOfBallPlayed = iplDAOS[i].six + iplDAOS[i].four;
+        for (int i=0;i<sort.length;i++) {
+            valueOfSixFOur = sort[i].six*6 + sort[i].four*4;
+            noOfBallPlayed = sort[i].six + sort[i].four;
             SR = (valueOfSixFOur/noOfBallPlayed)*100;
             if (SR >= max){
                 max = SR;
-                playerName = iplDAOS[i].player;
+                playerName = sort[i].player;
             }
         }
         return playerName;

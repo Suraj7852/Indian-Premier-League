@@ -1,6 +1,5 @@
 package iplanalyser;
 
-import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -43,9 +42,8 @@ public class IndianPremierLeagueTest {
     public void givenIplDataFile_forTopBattingAverage() {
         try {
             Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
-            String average = premierLeague.sort(loadIplData,IplFields.AVERAGE);
-            IplDTO[] iplDTOS = new Gson().fromJson(average, IplDTO[].class);
-            Assert.assertEquals("MS Dhoni",iplDTOS[0].player);
+            IplDAO[] average = premierLeague.sort(loadIplData,IplFields.AVERAGE);
+            Assert.assertEquals("MS Dhoni",average[0].player);
         } catch (IplAnalyserException e) {
             e.printStackTrace();
         }
@@ -55,9 +53,8 @@ public class IndianPremierLeagueTest {
     public void givenIplDataFile_forTopStrikeRate() {
         try {
             Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
-            String average = premierLeague.sort(loadIplData,IplFields.STRIKE_RATE);
-            IplDTO[] iplDTOS = new Gson().fromJson(average, IplDTO[].class);
-            Assert.assertEquals("Ishant Sharma",iplDTOS[0].player);
+            IplDAO[] average = premierLeague.sort(loadIplData,IplFields.STRIKE_RATE);
+            Assert.assertEquals("Ishant Sharma",average[0].player);
         } catch (IplAnalyserException e) {
             e.printStackTrace();
         }
