@@ -19,6 +19,7 @@ public class IndianPremierLeague {
         this.iplField = new HashMap<>();
         this.iplField.put(IplFields.AVERAGE,Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder()));
         this.iplField.put(IplFields.STRIKE_RATE,Comparator.comparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
+        this.iplField.put(IplFields.SIX,Comparator.comparing(iplDAO -> iplDAO.six,Comparator.reverseOrder()));
     }
 
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
@@ -48,5 +49,21 @@ public class IndianPremierLeague {
                 .collect(Collectors.toCollection(ArrayList::new));
         String sortedIplList = new Gson().toJson(ipl);
         return sortedIplList;
+    }
+
+    public String maxFourSix(Map<String, IplDAO> daoMap, IplFields six) {
+        String sort = this.sort(daoMap, six);
+        IplDAO[] iplDAOS = new Gson().fromJson(sort, IplDAO[].class);
+        int valueOfSixFOur=0;
+        int max = 0;
+        String playerName = "";
+        for (int i=0;i<iplDAOS.length;i++) {
+            valueOfSixFOur = iplDAOS[i].six*6 + iplDAOS[i].four*4;
+            if (valueOfSixFOur >= max){
+                max = valueOfSixFOur;
+                playerName = iplDAOS[i].player;
+            }
+        }
+        return playerName;
     }
 }

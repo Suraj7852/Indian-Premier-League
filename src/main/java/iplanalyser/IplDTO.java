@@ -21,13 +21,21 @@ public class IplDTO {
     @CsvBindByName(column = "SR", required = true)
     public double sr;
 
-    public IplDTO(String player, int match, int innings, int runs, String average, double sr) {
+    @CsvBindByName(column = "4s", required = true)
+    public int four;
+
+    @CsvBindByName(column = "6s", required = true)
+    public int six;
+
+    public IplDTO(String player, int match, int innings, int runs, String average, double sr, int four, int six) {
         this.player = player;
         this.match = match;
         this.innings = innings;
         this.runs = runs;
         this.average = average;
         this.sr = sr;
+        this.four = four;
+        this.six = six;
     }
 
     public IplDTO() {

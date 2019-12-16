@@ -7,6 +7,8 @@ public class IplDAO {
     int runs;
     double average;
     double sr;
+    int four;
+    int six;
 
     public IplDAO() {
     }
@@ -21,6 +23,8 @@ public class IplDAO {
         match=censusCSV.match;
         runs=censusCSV.runs;
         sr=censusCSV.sr;
+        four = censusCSV.four;
+        six = censusCSV.six;
     }
 
 }

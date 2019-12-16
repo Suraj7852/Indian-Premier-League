@@ -62,4 +62,15 @@ public class IndianPremierLeagueTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIplDataFile_WhoHitMat_SixAndFour() {
+        try {
+            Map<String, IplDAO> daoMap = premierLeague.loadIplData(IPL_CSV_FILE_PATH);
+            String maxFourSixPlayer = premierLeague.maxFourSix(daoMap, IplFields.SIX);
+            Assert.assertEquals("Andre Russell",maxFourSixPlayer);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
