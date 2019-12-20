@@ -11,6 +11,7 @@ public class IplDAO {
     int six;
     int wicket;
     double over;
+    double economy;
 
     public IplDAO() {
     }
@@ -35,6 +36,7 @@ public class IplDAO {
         sr = iplMostWicketDTO.sr.contains("-")?0:Double.parseDouble(iplMostWicketDTO.sr);
         over = iplMostWicketDTO.ov.contains("-")?0:Double.parseDouble(iplMostWicketDTO.ov);
         wicket = iplMostWicketDTO.wicket.contains("-")?0:Integer.parseInt(iplMostWicketDTO.wicket);
+        economy = iplMostWicketDTO.economy.contains("-")?0:Double.parseDouble(iplMostWicketDTO.economy);
     }
 
 }

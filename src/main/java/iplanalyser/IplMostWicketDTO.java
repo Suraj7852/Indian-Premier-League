@@ -27,7 +27,10 @@ public class IplMostWicketDTO {
     @CsvBindByName(column = "Wkts", required = true)
     public String wicket;
 
-    public IplMostWicketDTO(String player, String match, String innings, String runs, String average, String sr, String ov, String wicket) {
+    @CsvBindByName(column = "Econ", required = true)
+    public String economy;
+
+    public IplMostWicketDTO(String player, String match, String innings, String runs, String average, String sr, String ov, String wicket, String economy) {
         this.player = player;
         this.match = match;
         this.innings = innings;
@@ -36,6 +39,7 @@ public class IplMostWicketDTO {
         this.sr = sr;
         this.ov = ov;
         this.wicket = wicket;
+        this.economy = economy;
     }
 
     public IplMostWicketDTO() {

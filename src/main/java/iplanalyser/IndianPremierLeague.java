@@ -24,6 +24,7 @@ public class IndianPremierLeague {
         this.iplField.put(IplFields.AVG_WITH_SR,averageStrikeRate.thenComparing(ipl -> ipl.sr).reversed());
         Comparator<IplDAO>runsAverage = Comparator.comparing(iplDAO -> iplDAO.runs);
         this.iplField.put(IplFields.RUN_WITH_AVG,runsAverage.thenComparing(ipl -> ipl.average).reversed());
+        this.iplField.put(IplFields.ECONOMY,Comparator.comparing(iplDAO -> iplDAO.economy));
     }
 
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
