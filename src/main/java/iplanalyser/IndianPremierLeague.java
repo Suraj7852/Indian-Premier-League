@@ -18,7 +18,8 @@ public class IndianPremierLeague {
     public IndianPremierLeague() {
         this.iplField = new HashMap<>();
         this.iplField.put(IplFields.AVERAGE,Comparator.comparing(iplDAO -> iplDAO.average,Comparator.reverseOrder()));
-        this.iplField.put(IplFields.STRIKE_RATE,Comparator.comparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
+        Comparator<IplDAO> strikeRate = Comparator.comparing(iplDAO -> iplDAO.sr, Comparator.reverseOrder());
+        this.iplField.put(IplFields.STRIKE_RATE,strikeRate);
         this.iplField.put(IplFields.SIX,Comparator.comparing(iplDAO -> iplDAO.six,Comparator.reverseOrder()));
         Comparator<IplDAO>averageStrikeRate = Comparator.comparing(iplDAO -> iplDAO.average);
         this.iplField.put(IplFields.AVG_WITH_SR,averageStrikeRate.thenComparing(ipl -> ipl.sr).reversed());
@@ -28,6 +29,7 @@ public class IndianPremierLeague {
         Comparator<IplDAO>fiveWkt = Comparator.comparing(iplDTO -> iplDTO.fiveWkt,Comparator.reverseOrder());
         this.iplField.put(IplFields.SR_WITH_4W_5W,fiveWkt.thenComparing(iplDAO -> iplDAO.fourWkt,Comparator.reverseOrder())
                     .thenComparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
+        this.iplField.put(IplFields.BOWLING_AVG_SR,averageStrikeRate.thenComparing(iplDAO -> iplDAO.sr).reversed());
     }
 
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {
