@@ -25,6 +25,9 @@ public class IndianPremierLeague {
         Comparator<IplDAO>runsAverage = Comparator.comparing(iplDAO -> iplDAO.runs);
         this.iplField.put(IplFields.RUN_WITH_AVG,runsAverage.thenComparing(ipl -> ipl.average).reversed());
         this.iplField.put(IplFields.ECONOMY,Comparator.comparing(iplDAO -> iplDAO.economy));
+        Comparator<IplDAO>fiveWkt = Comparator.comparing(iplDTO -> iplDTO.fiveWkt,Comparator.reverseOrder());
+        this.iplField.put(IplFields.SR_WITH_4W_5W,fiveWkt.thenComparing(iplDAO -> iplDAO.fourWkt,Comparator.reverseOrder())
+                    .thenComparing(iplDAO -> iplDAO.sr,Comparator.reverseOrder()));
     }
 
     public Map<String, IplDAO> loadIplData(String filePath) throws IplAnalyserException {

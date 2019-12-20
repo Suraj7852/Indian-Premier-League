@@ -12,6 +12,8 @@ public class IplDAO {
     int wicket;
     double over;
     double economy;
+    int fourWkt;
+    int fiveWkt;
 
     public IplDAO() {
     }
@@ -37,6 +39,8 @@ public class IplDAO {
         over = iplMostWicketDTO.ov.contains("-")?0:Double.parseDouble(iplMostWicketDTO.ov);
         wicket = iplMostWicketDTO.wicket.contains("-")?0:Integer.parseInt(iplMostWicketDTO.wicket);
         economy = iplMostWicketDTO.economy.contains("-")?0:Double.parseDouble(iplMostWicketDTO.economy);
+        fourWkt = iplMostWicketDTO.fourWkt.contains("-")?0:Integer.parseInt(iplMostWicketDTO.fourWkt);
+        fiveWkt = iplMostWicketDTO.fiveWkt.contains("-")?0:Integer.parseInt(iplMostWicketDTO.fiveWkt);
     }
 
 }

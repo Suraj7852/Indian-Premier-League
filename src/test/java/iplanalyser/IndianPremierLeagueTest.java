@@ -139,4 +139,15 @@ public class IndianPremierLeagueTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIplDataFile_forTopStrikeRateWith4WicketAnd5Wicket() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplWicketData(IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.SR_WITH_4W_5W);
+            Assert.assertEquals("Alzarri Joseph", average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
