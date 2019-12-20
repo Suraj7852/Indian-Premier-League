@@ -7,27 +7,27 @@ public class IplMostWicketDTO {
     public String player;
 
     @CsvBindByName(column = "Mat", required = true)
-    public int match;
+    public String match;
 
     @CsvBindByName(column = "Inns", required = true)
-    public int innings;
+    public String innings;
 
     @CsvBindByName(column = "Runs", required = true)
-    public int runs;
+    public String runs;
 
     @CsvBindByName(column = "Avg", required = true)
     public String average;
 
     @CsvBindByName(column = "SR", required = true)
-    public double sr;
+    public String sr;
 
     @CsvBindByName(column = "Ov", required = true)
-    public double ov;
+    public String ov;
 
     @CsvBindByName(column = "Wkts", required = true)
-    public int wicket;
+    public String wicket;
 
-    public IplMostWicketDTO(String player, int match, int innings, int runs, String average, double sr, double ov, int wicket) {
+    public IplMostWicketDTO(String player, String match, String innings, String runs, String average, String sr, String ov, String wicket) {
         this.player = player;
         this.match = match;
         this.innings = innings;

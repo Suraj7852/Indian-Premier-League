@@ -56,7 +56,7 @@ public class IndianPremierLeague {
             Iterator<IplMostWicketDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IplMostWicketDTO.class);
             Iterable<IplMostWicketDTO> csvIterable = () -> csvFileIterator;
             StreamSupport.stream(csvIterable.spliterator(),false)
-                    .map(IplMostRunDTO.class::cast)
+                    .map(IplMostWicketDTO.class::cast)
                     .forEach(iplDAO -> iplPlayerMap.put(iplDAO.player,new IplDAO(iplDAO)));
             return iplPlayerMap;
         } catch (IOException e) {

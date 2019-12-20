@@ -1,4 +1,4 @@
-﻿POS,PLAYER,Mat,Inns,Ov,Runs,Wkts,BBI,Avg,Econ,SR,4w,5w,
+﻿POS,PLAYER,Mat,Inns,Ov,Runs,Wkts,BBI,Avg,Econ,SR,4w,5w,nullValue
 1,Imran Tahir,17,17,64.2,431,26,0,16.57,6.69,14.84,2,0,
 2,Kagiso Rabada,12,12,47,368,25,0,14.72,7.82,11.28,2,0,
 3,Deepak Chahar,17,17,64.3,482,22,0,21.9,7.47,17.59,0,0,
@@ -87,7 +87,6 @@
 87,Ben Cutting,3,1,2,27,1,0,27,13.5,12,0,0,
 88,Shivam Dube,4,2,1.4,8,0,0,-,4.8,-,0,0,
 89,Suresh Raina,17,1,1,6,0,0,-,6,-,0,0,
-90,Yusuf Pathan,10,1,1,8,0,0,-,8,-,0,0,
 91,Hanuma Vihari,2,1,1,9,0,0,-,9,-,0,0,
 92,Basil Thampi,3,3,12,110,0,0,-,9.16,-,0,0,
 93,Harpreet Brar,2,2,5,48,0,0,-,9.6,-,0,0,
@@ -97,6 +96,3 @@
 97,Colin de Grandhomme,4,3,5,55,0,0,-,11,-,0,0,
 98,Barinder Sran,2,2,4,51,0,0,-,12.75,-,0,0,
 99,Mandeep Singh,13,2,2,26,0,0,-,13,-,0,0,
-100,,13,-,0,0,
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,

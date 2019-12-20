@@ -29,12 +29,12 @@ public class IplDAO {
     public IplDAO(IplMostWicketDTO iplMostWicketDTO) {
         player = iplMostWicketDTO.player;
         average = iplMostWicketDTO.average.contains("-")?0:Double.parseDouble(iplMostWicketDTO.average);
-        innings = iplMostWicketDTO.innings;
-        match = iplMostWicketDTO.match;
-        runs = iplMostWicketDTO.runs;
-        sr = iplMostWicketDTO.sr;
-        over = iplMostWicketDTO.ov;
-        wicket = iplMostWicketDTO.wicket;
+        innings = iplMostWicketDTO.innings.contains("-")?0:Integer.parseInt(iplMostWicketDTO.innings);
+        match = iplMostWicketDTO.match.contains("-")?0:Integer.parseInt(iplMostWicketDTO.wicket);
+        runs = iplMostWicketDTO.runs.contains("-")?0:Integer.parseInt(iplMostWicketDTO.runs);
+        sr = iplMostWicketDTO.sr.contains("-")?0:Double.parseDouble(iplMostWicketDTO.sr);
+        over = iplMostWicketDTO.ov.contains("-")?0:Double.parseDouble(iplMostWicketDTO.ov);
+        wicket = iplMostWicketDTO.wicket.contains("-")?0:Integer.parseInt(iplMostWicketDTO.wicket);
     }
 
 }
