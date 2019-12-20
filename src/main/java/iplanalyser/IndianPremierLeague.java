@@ -47,6 +47,27 @@ public class IndianPremierLeague {
         }
     }
 
+    public Map<String, IplDAO> loadIplWicketData(String filePath) throws IplAnalyserException {
+        Map<String, IplDAO> iplPlayerMap = new HashMap<>();
+        try (Reader reader = Files.newBufferedReader(Paths.get(filePath))
+        ){
+
+            ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<IplMostWicketDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IplMostWicketDTO.class);
+            Iterable<IplMostWicketDTO> csvIterable = () -> csvFileIterator;
+            StreamSupport.stream(csvIterable.spliterator(),false)
+                    .map(IplMostRunDTO.class::cast)
+                    .forEach(iplDAO -> iplPlayerMap.put(iplDAO.player,new IplDAO(iplDAO)));
+            return iplPlayerMap;
+        } catch (IOException e) {
+            throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.FILE_PROBLEM);
+        } catch (CSVBuilderException e) {
+            throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.UNABLE_TO_PARSE);
+        } catch (RuntimeException e) {
+            throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.HEADER_MISMATCH);
+        }
+    }
+
     public IplDAO[] sort(Map<String, IplDAO> loadIplData, IplFields fields) {
         ArrayList ipl = loadIplData.values().stream()
                 .sorted(this.iplField.get(fields))

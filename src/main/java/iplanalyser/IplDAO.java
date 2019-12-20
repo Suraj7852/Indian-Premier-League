@@ -9,6 +9,8 @@ public class IplDAO {
     double sr;
     int four;
     int six;
+    int wicket;
+    double over;
 
     public IplDAO() {
     }
@@ -22,6 +24,17 @@ public class IplDAO {
         sr = censusCSV.sr;
         four = censusCSV.four;
         six = censusCSV.six;
+    }
+
+    public IplDAO(IplMostWicketDTO iplMostWicketDTO) {
+        player = iplMostWicketDTO.player;
+        average = iplMostWicketDTO.average.contains("-")?0:Double.parseDouble(iplMostWicketDTO.average);
+        innings = iplMostWicketDTO.innings;
+        match = iplMostWicketDTO.match;
+        runs = iplMostWicketDTO.runs;
+        sr = iplMostWicketDTO.sr;
+        over = iplMostWicketDTO.ov;
+        wicket = iplMostWicketDTO.wicket;
     }
 
 }
