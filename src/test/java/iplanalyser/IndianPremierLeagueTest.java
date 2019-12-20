@@ -116,4 +116,15 @@ public class IndianPremierLeagueTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIplDataFile_forTopBowlingStrikeRate() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplWicketData(IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData,IplFields.STRIKE_RATE);
+            Assert.assertEquals("Krishnappa Gowtham",average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
