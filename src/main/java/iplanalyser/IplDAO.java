@@ -5,7 +5,8 @@ public class IplDAO {
     int match;
     int innings;
     int runs;
-    double average;
+    double bowlingAverage;
+    double battingAverage;
     double sr;
     int four;
     int six;
@@ -20,7 +21,7 @@ public class IplDAO {
 
     public IplDAO(IplMostRunDTO censusCSV) {
         player = censusCSV.player;
-        average = censusCSV.average.contains("-")?0:Double.parseDouble(censusCSV.average);
+        battingAverage = censusCSV.average.contains("-")?0:Double.parseDouble(censusCSV.average);
         innings = censusCSV.innings;
         match = censusCSV.match;
         runs = censusCSV.runs;
@@ -31,7 +32,7 @@ public class IplDAO {
 
     public IplDAO(IplMostWicketDTO iplMostWicketDTO) {
         player = iplMostWicketDTO.player;
-        average = iplMostWicketDTO.average.contains("-")?0:Double.parseDouble(iplMostWicketDTO.average);
+        bowlingAverage = iplMostWicketDTO.average.contains("-")?0:Double.parseDouble(iplMostWicketDTO.average);
         innings = iplMostWicketDTO.innings.contains("-")?0:Integer.parseInt(iplMostWicketDTO.innings);
         match = iplMostWicketDTO.match.contains("-")?0:Integer.parseInt(iplMostWicketDTO.wicket);
         runs = iplMostWicketDTO.runs.contains("-")?0:Integer.parseInt(iplMostWicketDTO.runs);
@@ -42,5 +43,4 @@ public class IplDAO {
         fourWkt = iplMostWicketDTO.fourWkt.contains("-")?0:Integer.parseInt(iplMostWicketDTO.fourWkt);
         fiveWkt = iplMostWicketDTO.fiveWkt.contains("-")?0:Integer.parseInt(iplMostWicketDTO.fiveWkt);
     }
-
 }

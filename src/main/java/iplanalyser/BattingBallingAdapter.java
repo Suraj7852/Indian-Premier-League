@@ -18,23 +18,24 @@ public class BattingBallingAdapter extends IplAdapter {
     @Override
     public <E> Map<String, IplDAO> loadIplData(IndianPremierLeague.Cricket cricket, String... filepath) throws IplAnalyserException {
         Map<String, IplDAO> iplDAOMap = super.loadIplData(IplMostRunDTO.class, filepath[0]);
-        if (filepath.length>1)
-            this.loadIplWicketData(iplDAOMap,filepath[1]);
+        if (filepath.length > 1)
+            this.loadIplWicketData(iplDAOMap, filepath[1]);
         return iplDAOMap;
     }
 
     private Map<String, IplDAO> loadIplWicketData(Map<String, IplDAO> iplDAOMap, String filePath) throws IplAnalyserException {
-        Map<String, IplDAO> iplPlayerMap = new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))
-        ){
+        ) {
 
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IplMostWicketDTO> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IplMostWicketDTO.class);
             Iterable<IplMostWicketDTO> csvIterable = () -> csvFileIterator;
-            StreamSupport.stream(csvIterable.spliterator(),false)
-                    .map(IplMostWicketDTO.class::cast)
-                    .forEach(iplDAO -> iplDAOMap.put(iplDAO.player,new IplDAO(iplDAO)));
-            return iplPlayerMap;
+            StreamSupport.stream(csvIterable.spliterator(), false)
+                    .filter(iplMostWicketDTO -> iplDAOMap.get(iplMostWicketDTO.player) != null)
+                    .forEach(iplDAO -> {
+                        iplDAOMap.get(iplDAO.player).bowlingAverage = iplDAO.average.contains("-") ? 0 : Double.parseDouble(iplDAO.average);
+                    });
+            return iplDAOMap;
         } catch (IOException e) {
             throw new IplAnalyserException(e.getMessage(), IplAnalyserException.ExceptionType.FILE_PROBLEM);
         } catch (CSVBuilderException e) {
