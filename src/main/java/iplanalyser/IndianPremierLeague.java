@@ -10,6 +10,7 @@ public class IndianPremierLeague {
     public enum Cricket {BATSMAN, BOWLER}
 
     ;
+
     Map<IplFields, Comparator<IplDAO>> iplField = null;
 
     public IndianPremierLeague() {
@@ -31,7 +32,7 @@ public class IndianPremierLeague {
         this.iplField.put(IplFields.WICKET, wicket.thenComparing(iplDAO -> iplDAO.bowlingAverage).reversed());
         Comparator<IplDAO> battingAverage = Comparator.comparing(iplDTO -> iplDTO.battingAverage);
         this.iplField.put(IplFields.BATTING_BOWLING_AVG, battingAverage.thenComparing(iplDAO -> iplDAO.bowlingAverage, Comparator.reverseOrder()));
-        this.iplField.put(IplFields.RUNS,Comparator.comparing(iplDAO -> iplDAO.runs,Comparator.reverseOrder()));
+        this.iplField.put(IplFields.RUNS, Comparator.comparing(iplDAO -> iplDAO.runs, Comparator.reverseOrder()));
     }
 
     public Map<String, IplDAO> loadIplData(Cricket cricket, String... filePath) throws IplAnalyserException {
@@ -53,11 +54,11 @@ public class IndianPremierLeague {
         int valueOfSixFOur = 0;
         int max = 0;
         String playerName = "";
-        for (int i = 0; i < sort.length; i++) {
-            valueOfSixFOur = sort[i].six * 6 + sort[i].four * 4;
+        for (IplDAO iplDAO : sort) {
+            valueOfSixFOur = iplDAO.six * 6 + iplDAO.four * 4;
             if (valueOfSixFOur >= max) {
                 max = valueOfSixFOur;
-                playerName = sort[i].player;
+                playerName = iplDAO.player;
             }
         }
         return playerName;
@@ -70,13 +71,13 @@ public class IndianPremierLeague {
         double max = 0;
         double strikeRate = 0.0;
         String playerName = "";
-        for (int i = 0; i < sort.length; i++) {
-            scoreBasedOnSixFOur = sort[i].six * 6 + sort[i].four * 4;
-            noOfBallPlayed = sort[i].six + sort[i].four;
+        for (IplDAO iplDAO : sort) {
+            scoreBasedOnSixFOur = iplDAO.six * 6 + iplDAO.four * 4;
+            noOfBallPlayed = iplDAO.six + iplDAO.four;
             strikeRate = (scoreBasedOnSixFOur / noOfBallPlayed) * 100;
             if (strikeRate >= max) {
                 max = strikeRate;
-                playerName = sort[i].player;
+                playerName = iplDAO.player;
             }
         }
         return playerName;
@@ -90,11 +91,11 @@ public class IndianPremierLeague {
         double averageForBatBall;
         double max = 0;
         String player = "";
-        for (int i = 0; i < average.length; i++) {
-            averageForBatBall = (average[i].battingAverage + average[i].bowlingAverage) / 2;
+        for (IplDAO iplDAO : average) {
+            averageForBatBall = (iplDAO.battingAverage + iplDAO.bowlingAverage) / 2;
             if (averageForBatBall > max) {
                 max = averageForBatBall;
-                player = average[i].player;
+                player = iplDAO.player;
             }
         }
         return player;
@@ -103,10 +104,10 @@ public class IndianPremierLeague {
     public String mostRunAndMostWicket(IplDAO[] average) {
         double max = 0;
         String player = "";
-        for (int i = 0; i < average.length; i++) {
-            if (average[i].wicket > max) {
-                max = average[i].wicket;
-                player = average[i].player;
+        for (IplDAO iplDAO : average) {
+            if (iplDAO.wicket > max) {
+                max = iplDAO.wicket;
+                player = iplDAO.player;
             }
         }
         return player;

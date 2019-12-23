@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
-public class BattingBallingAdapter extends IplAdapter {
+public class BattingBowlingAdapter extends IplAdapter {
 
     @Override
     public <E> Map<String, IplDAO> loadIplData(IndianPremierLeague.Cricket cricket, String... filepath) throws IplAnalyserException {
