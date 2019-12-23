@@ -5,7 +5,7 @@ public class IplAnalyserFactory {
         if (cricket.equals(IndianPremierLeague.Cricket.BATSMAN))
             return new BattingBallingAdapter();
         else if (cricket.equals(IndianPremierLeague.Cricket.BOWLER))
-            return new BattingBallingAdapter();
+            return new BallingAdapter();
         throw new IplAnalyserException("Invalid field", IplAnalyserException.ExceptionType.INVALID_FIELD);
     }
 }

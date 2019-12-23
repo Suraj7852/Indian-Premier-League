@@ -118,58 +118,58 @@ public class IndianPremierLeagueTest {
         }
     }
 
-//    @Test
-//    public void givenIplDataFile_forTopBowlingStrikeRate() {
-//        try {
-//            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_BOWLING_FILE_PATH);
-//            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.STRIKE_RATE);
-//            Assert.assertEquals("Krishnappa Gowtham", average[0].player);
-//        } catch (IplAnalyserException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Test
-//    public void givenIplDataFile_forTopBowlingEconomyRate() {
-//        try {
-//            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_BOWLING_FILE_PATH);
-//            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.ECONOMY);
-//            Assert.assertEquals("Shivam Dube", average[0].player);
-//        } catch (IplAnalyserException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Test
-//    public void givenIplDataFile_forTopStrikeRateWith4WicketAnd5Wicket() {
-//        try {
-//            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_BOWLING_FILE_PATH);
-//            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.SR_WITH_4W_5W);
-//            Assert.assertEquals("Alzarri Joseph", average[0].player);
-//        } catch (IplAnalyserException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Test
-//    public void givenIplDataFile_forTopStrikeRateWithBestBowlingAverage() {
-//        try {
-//            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_BOWLING_FILE_PATH);
-//            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.BOWLING_AVG_SR);
-//            Assert.assertEquals("Krishnappa Gowtham", average[0].player);
-//        } catch (IplAnalyserException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Test
-//    public void givenIplDataFile_forMostWicketWithBestBowlingAverage() {
-//        try {
-//            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IPL_CSV_BOWLING_FILE_PATH);
-//            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.WICKET);
-//            Assert.assertEquals("Suresh Raina", average[0].player);
-//        } catch (IplAnalyserException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void givenIplDataFile_forTopBowlingStrikeRate() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER,IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.STRIKE_RATE);
+            Assert.assertEquals("Krishnappa Gowtham", average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_forTopBowlingEconomyRate() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER,IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.ECONOMY);
+            Assert.assertEquals("Shivam Dube", average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_forTopStrikeRateWith4WicketAnd5Wicket() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER,IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.SR_WITH_4W_5W);
+            Assert.assertEquals("Alzarri Joseph", average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_forTopStrikeRateWithBestBowlingAverage() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER,IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.BOWLING_AVG_SR);
+            Assert.assertEquals("Krishnappa Gowtham", average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIplDataFile_forMostWicketWithBestBowlingAverage() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER,IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.WICKET);
+            Assert.assertEquals("Suresh Raina", average[0].player);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
