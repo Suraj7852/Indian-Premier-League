@@ -34,6 +34,7 @@ public class BattingBallingAdapter extends IplAdapter {
                     .filter(iplMostWicketDTO -> iplDAOMap.get(iplMostWicketDTO.player) != null)
                     .forEach(iplDAO -> {
                         iplDAOMap.get(iplDAO.player).bowlingAverage = iplDAO.average.contains("-") ? 0 : Double.parseDouble(iplDAO.average);
+                        iplDAOMap.get(iplDAO.player).wicket = iplDAO.average.contains("-") ? 0 : Integer.parseInt(iplDAO.wicket);
                     });
             return iplDAOMap;
         } catch (IOException e) {

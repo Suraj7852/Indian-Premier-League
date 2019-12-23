@@ -31,6 +31,7 @@ public class IndianPremierLeague {
         this.iplField.put(IplFields.WICKET, wicket.thenComparing(iplDAO -> iplDAO.bowlingAverage).reversed());
         Comparator<IplDAO> battingAverage = Comparator.comparing(iplDTO -> iplDTO.battingAverage);
         this.iplField.put(IplFields.BATTING_BOWLING_AVG, battingAverage.thenComparing(iplDAO -> iplDAO.bowlingAverage, Comparator.reverseOrder()));
+        this.iplField.put(IplFields.RUNS,Comparator.comparing(iplDAO -> iplDAO.runs,Comparator.reverseOrder()));
     }
 
     public Map<String, IplDAO> loadIplData(Cricket cricket, String... filePath) throws IplAnalyserException {
@@ -93,6 +94,18 @@ public class IndianPremierLeague {
             averageForBatBall = (average[i].battingAverage + average[i].bowlingAverage) / 2;
             if (averageForBatBall > max) {
                 max = averageForBatBall;
+                player = average[i].player;
+            }
+        }
+        return player;
+    }
+
+    public String mostRunAndMostWicket(IplDAO[] average) {
+        double max = 0;
+        String player = "";
+        for (int i = 0; i < average.length; i++) {
+            if (average[i].wicket > max) {
+                max = average[i].wicket;
                 player = average[i].player;
             }
         }

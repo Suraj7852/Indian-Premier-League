@@ -184,4 +184,16 @@ public class IndianPremierLeagueTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIplDataFile_MostRunsAndWicket() {
+        try {
+            Map<String, IplDAO> loadIplData = premierLeague.loadIplData(IndianPremierLeague.Cricket.BATSMAN,IPL_CSV_FILE_PATH,IPL_CSV_BOWLING_FILE_PATH);
+            IplDAO[] average = premierLeague.sort(loadIplData, IplFields.RUNS);
+            String battingAndBowlingAverage = premierLeague.mostRunAndMostWicket(average);
+            Assert.assertEquals("Kagiso Rabada", battingAndBowlingAverage);
+        } catch (IplAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
