@@ -19,11 +19,21 @@ public class IplDAO {
     public IplDAO() {
     }
 
-    public IplDAO(String player, int match, int innings, int runs) {
+    public IplDAO(String player, int match, int innings, int runs, double bowlingAverage, double battingAverage, double sr, int four, int six, int wicket, double over, double economy, int fourWkt, int fiveWkt) {
         this.player = player;
         this.match = match;
         this.innings = innings;
         this.runs = runs;
+        this.bowlingAverage = bowlingAverage;
+        this.battingAverage = battingAverage;
+        this.sr = sr;
+        this.four = four;
+        this.six = six;
+        this.wicket = wicket;
+        this.over = over;
+        this.economy = economy;
+        this.fourWkt = fourWkt;
+        this.fiveWkt = fiveWkt;
     }
 
     public IplDAO(IplMostRunDTO censusCSV) {
