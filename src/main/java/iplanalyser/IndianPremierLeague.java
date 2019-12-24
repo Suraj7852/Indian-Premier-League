@@ -36,8 +36,11 @@ public class IndianPremierLeague {
         this.iplField.put(IplFields.RUNS, Comparator.comparing(iplDAO -> iplDAO.runs, Comparator.reverseOrder()));
     }
 
+    public void setIplAdapter(IplAdapter adpater) {
+        this.iplAdapter = adpater;
+    }
+
     public Map<String, IplDAO> loadIplData(Cricket cricket, String... filePath) throws IplAnalyserException {
-        IplAdapter iplAdapter = IplAnalyserFactory.loadIplData(cricket);
         return iplAdapter.loadIplData(cricket, filePath);
     }
 

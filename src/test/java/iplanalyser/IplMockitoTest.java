@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 
 public class IplMockitoTest {
     private static final String IPL_CSV_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
+    private static final String IPL_CSV_BOWLING_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostWkts.csv";
     @Mock
     IplAdapter iplAdapter;
     BowlingAdapter bowlingAdapter;
@@ -35,10 +36,12 @@ public class IplMockitoTest {
     @Test
     public void givenSampleData_ShouldReturnCount() {
         try {
-            IplAdapter iplAdapter = mock(IplAdapter.class);
-            when(iplAdapter.loadIplData(IplMostRunDTO.class, IPL_CSV_FILE_PATH)).thenReturn(daoMap);
-            Map<String, IplDAO> realMap = iplAdapter.loadIplData(IplMostRunDTO.class, IPL_CSV_FILE_PATH);
-            Assert.assertEquals(2, realMap.size());
+            IplAdapter iplAdapter = mock(IplAnalyserFactory.loadIplData(IndianPremierLeague.Cricket.BATSMAN).getClass());
+            when(iplAdapter.loadIplData(IndianPremierLeague.Cricket.BATSMAN, IPL_CSV_FILE_PATH)).thenReturn(daoMap);
+            IndianPremierLeague indianPremierLeague = new IndianPremierLeague();
+            indianPremierLeague.setIplAdapter(iplAdapter);
+            Map<String, IplDAO> iplDAOMap = indianPremierLeague.loadIplData(IndianPremierLeague.Cricket.BATSMAN, IPL_CSV_FILE_PATH);
+            Assert.assertEquals(2, iplDAOMap.size());
         } catch (IplAnalyserException e) {
             e.printStackTrace();
         }
@@ -47,9 +50,11 @@ public class IplMockitoTest {
     @Test
     public void givenSampleData_WhenBowlingAdapterMock_ShouldReturnMap() {
         try {
-            BowlingAdapter bowlingAdapter = mock(BowlingAdapter.class);
-            when(bowlingAdapter.loadIplData(IplMostWicketDTO.class, IPL_CSV_FILE_PATH)).thenReturn(daoMap);
-            Map<String, IplDAO> iplDAOMap = bowlingAdapter.loadIplData(IplMostWicketDTO.class, IPL_CSV_FILE_PATH);
+            IplAdapter bowlingAdapter = mock(IplAnalyserFactory.loadIplData(IndianPremierLeague.Cricket.BOWLER).getClass());
+            when(bowlingAdapter.loadIplData(IndianPremierLeague.Cricket.BOWLER, IPL_CSV_BOWLING_FILE_PATH)).thenReturn(daoMap);
+            IndianPremierLeague indianPremierLeague = new IndianPremierLeague();
+            indianPremierLeague.setIplAdapter(bowlingAdapter);
+            Map<String, IplDAO> iplDAOMap = indianPremierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER,IPL_CSV_BOWLING_FILE_PATH);
             Assert.assertEquals(2, iplDAOMap.size());
         } catch (IplAnalyserException e) {
             e.printStackTrace();
@@ -59,9 +64,11 @@ public class IplMockitoTest {
     @Test
     public void givenSampleData_WhenBattingBowlingAdapterMock_ShouldReturnMap() {
         try {
-            BattingBowlingAdapter battingBowlingAdapter = mock(BattingBowlingAdapter.class);
-            when(battingBowlingAdapter.loadIplData(IplMostWicketDTO.class, IPL_CSV_FILE_PATH)).thenReturn(daoMap);
-            Map<String, IplDAO> iplDAOMap = battingBowlingAdapter.loadIplData(IplMostWicketDTO.class, IPL_CSV_FILE_PATH);
+            IplAdapter battingBowlingAdapter = mock(IplAnalyserFactory.loadIplData(IndianPremierLeague.Cricket.BOWLER).getClass());
+            when(battingBowlingAdapter.loadIplData(IndianPremierLeague.Cricket.BOWLER, IPL_CSV_FILE_PATH)).thenReturn(daoMap);
+            IndianPremierLeague indianPremierLeague = new IndianPremierLeague();
+            indianPremierLeague.setIplAdapter(battingBowlingAdapter);
+            Map<String, IplDAO> iplDAOMap = indianPremierLeague.loadIplData(IndianPremierLeague.Cricket.BOWLER, IPL_CSV_FILE_PATH);
             Assert.assertEquals(2, iplDAOMap.size());
         } catch (IplAnalyserException e) {
             e.printStackTrace();
