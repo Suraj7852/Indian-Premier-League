@@ -10,6 +10,7 @@ public class IndianPremierLeague {
     public enum Cricket {BATSMAN, BOWLER}
 
     ;
+    private IplAdapter iplAdapter;
 
     Map<IplFields, Comparator<IplDAO>> iplField = null;
 

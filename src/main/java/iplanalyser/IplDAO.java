@@ -19,6 +19,13 @@ public class IplDAO {
     public IplDAO() {
     }
 
+    public IplDAO(String player, int match, int innings, int runs) {
+        this.player = player;
+        this.match = match;
+        this.innings = innings;
+        this.runs = runs;
+    }
+
     public IplDAO(IplMostRunDTO censusCSV) {
         player = censusCSV.player;
         battingAverage = censusCSV.average.contains("-")?0:Double.parseDouble(censusCSV.average);
